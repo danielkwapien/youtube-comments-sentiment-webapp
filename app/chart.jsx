@@ -9,12 +9,12 @@ const ChartComponent = ({ fetchedData }) => {
         datasets: [{
           data: Object.values(fetchedData),
           backgroundColor: [
-            // Define your desired colors for each slice here (optional)
+            'aqua', 'red', 'green', 'blue', 'yellow', 'purple', 'orange', 'pink', 'brown', 'grey', 'black', 'white'
           ]
         }]
       };
+
     const options = {
-      // Optional chart customization options
     };
   
     return (
