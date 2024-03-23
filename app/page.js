@@ -1,26 +1,37 @@
 'use client';
 import React, { useEffect, useState, useRef } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import ChartComponent from './chart.jsx'
+import ChartComponent from '../components/chart.jsx'
+import Navbar from '../components/navbar.jsx';
+import Thumbnail from "../components/thumbnail.jsx";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Home() {
 
-  const [message, setMessage] = useState("Loading...");
-  const [data, setData] = useState(null);
+  const [title, setTitle] = useState("Loading...");
+  const [thumbnail, setThumbnail] = useState(null);
+  const [timeline, setTimeline] = useState(null);
+  const [emotions, setEmotions] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/Uk28ec4W4sA").then(
+    fetch("http://localhost:5000/api/sNMtjs_wQiE").then(
       (response) => response.json()
     ).then(
-      (data) => { setMessage(data.gratitude); setData(data) }
+      (data) => { 
+        setTitle(data.title['0'].title); 
+        setThumbnail(data.thumbnail['0']);
+        setTimeline(data.time);
+        setEmotions(data.proportion);
+         }
     )
   }, []);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="text-4xl font-bold text-center">{message}</div>
-      {data && <ChartComponent fetchedData={data} />}
+      <Navbar />
+      <div className="text-4xl font-bold text-center">{title}</div>
+      <Thumbnail src={thumbnail} alt={title} />
+      {emotions && <ChartComponent fetchedData={emotions} />}
     </main>
   );
 }
