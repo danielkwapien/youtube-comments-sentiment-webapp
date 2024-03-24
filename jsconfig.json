@@ -3,7 +3,7 @@
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["./components/*"],
-      "@logo/*": ["./components/logo/*"],
+      "@logo/*": ["./images/logo/*"],
     }
   }
 }

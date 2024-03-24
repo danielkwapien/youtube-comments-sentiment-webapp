@@ -1,8 +1,10 @@
+import Logo from '@components/Logo.jsx'
+
 const Navbar = () => {
  return(
     <header>
         <nav>
-            {/* Logo */}
+            <Logo />
         </nav>
     </header>
  )

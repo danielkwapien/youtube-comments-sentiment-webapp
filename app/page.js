@@ -1,9 +1,9 @@
 'use client';
 import React, { useEffect, useState, useRef } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import ChartComponent from '../components/chart.jsx'
-import Header from '../components/header.jsx';
-import Thumbnail from "../components/thumbnail.jsx";
+import ChartComponent from '../components/Chart.jsx'
+import Header from '../components/Header.jsx';
+import Thumbnail from "../components/Thumbnail.jsx";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
