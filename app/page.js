@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import ChartComponent from '../components/chart.jsx'
-import Navbar from '../components/navbar.jsx';
+import Header from '../components/header.jsx';
 import Thumbnail from "../components/thumbnail.jsx";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -28,9 +28,9 @@ export default function Home() {
   }, []);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Navbar />
+      <Header />
       <div className="text-4xl font-bold text-center">{title}</div>
-      <Thumbnail src={thumbnail} alt={title} />
+      {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
       {emotions && <ChartComponent fetchedData={emotions} />}
     </main>
   );
