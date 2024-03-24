@@ -1,14 +1,19 @@
 import React, { useState, useContext } from "react";
 import { Input } from "@components/ui/input.jsx";
 import { Button } from "@/components/ui/button.jsx";
+import { VideoContext } from "../app/page.js";
 
 function Hero() {
 
-    const [isLoading, setIsLoading] = useState(false);
+    const { title, thumbnail, timeline, emotions, isLoading, analyzeVideo } = useContext(VideoContext);
     const [videoUrl, setVideoUrl] = useState("");
 
     const handleInputChange = (event) => {
         setVideoUrl(event.target.value);
+      };
+
+    const handleAnalyzeButtonClick = () => {
+        analyzeVideo(videoUrl);
       };
 
   return (
@@ -27,7 +32,7 @@ function Hero() {
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Input type="text" placeholder="Enter a youtube video link" value={videoUrl} onChange={handleInputChange} />
-                <Button onClick={analyzeVideo} disabled={isLoading} >
+                <Button onClick={handleAnalyzeButtonClick} disabled={isLoading} >
                     Analyze video
                 </Button>
               </div>
