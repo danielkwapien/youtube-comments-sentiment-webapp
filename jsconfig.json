@@ -4,6 +4,7 @@
       "@/*": ["./*"],
       "@components/*": ["./components/*"],
       "@logo/*": ["./images/logo/*"],
+      "@contexts/*": ["./app/contexts/*"],
     }
   }
 }

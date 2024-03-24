@@ -11,35 +11,6 @@ function Hero() {
         setVideoUrl(event.target.value);
       };
 
-    function extractVideoId(url) {
-        // Regular expression to match different YouTube URL formats
-        const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:(?:watch\?v=)?([^#&?]+))/;
-        const match = url.match(regex);
-      
-        return match && match[1];
-      }
-    
-      const analyzeVideo = async (url) => {
-        setIsLoading(true);
-    
-        try {
-          const videoId = extractVideoId(videoUrl);
-          const response = await fetch(`http://localhost:5000/api/${videoId}`);
-          const data = await response.json();
-          setTitle(data.title['0'].title);
-          setThumbnail(data.thumbnail['0']);
-          setTimeline(data.time);
-          setEmotions(data.proportion);
-        }
-        catch (error) {
-          console.error(error);
-        }
-        finally {
-          setIsLoading(false);
-        }
-    
-      }
-
   return (
     <div className="relative isolate pt-14 dark:bg-black">
         <div className="py-12 sm:py-20 lg:pb-40">

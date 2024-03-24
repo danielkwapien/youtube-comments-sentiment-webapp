@@ -1,5 +1,7 @@
 'use client';
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext} from "react";
+import { VideoContext } from "@contexts/VideoContext.js";
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import ChartComponent from '../components/Chart.jsx'
 import Header from '../components/Header.jsx';
