@@ -10,23 +10,17 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Home() {
 
+  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("Loading...");
   const [thumbnail, setThumbnail] = useState(null);
   const [timeline, setTimeline] = useState(null);
   const [emotions, setEmotions] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/sNMtjs_wQiE").then(
-      (response) => response.json()
-    ).then(
-      (data) => { 
-        setTitle(data.title['0'].title); 
-        setThumbnail(data.thumbnail['0']);
-        setTimeline(data.time);
-        setEmotions(data.proportion);
-         }
-    )
+    
   }, []);
+
+
   return (
     <main className="">
       <Header />
