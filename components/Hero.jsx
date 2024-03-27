@@ -5,7 +5,7 @@ import { VideoContext } from "../app/page.js";
 
 function Hero() {
 
-    const { title, thumbnail, timeline, emotions, isLoading, analyzeVideo } = useContext(VideoContext);
+    const { isLoading, analyzeVideo } = useContext(VideoContext);
     const [videoUrl, setVideoUrl] = useState("");
 
     const handleInputChange = (event) => {
