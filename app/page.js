@@ -2,10 +2,11 @@
 import React, { useEffect, useState, useRef, useContext, createContext} from "react";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import ChartComponent from '../components/Chart.jsx'
+import ChartComponent from '@/components/Chart.jsx'
 import Header from '../components/Header.jsx';
 import Thumbnail from "@components/Thumbnail.jsx"
 import Hero from "@components/Hero.jsx";
+import Test from "@components/Test.jsx"
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -53,8 +54,10 @@ export default function Home() {
       }}
     >
       <Header />
+        
         <Hero />
         {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
+        <Test/>
         {emotions && <ChartComponent fetchedData={emotions} />}
     </VideoContext.Provider>
 
