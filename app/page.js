@@ -17,7 +17,7 @@ export default function Home() {
   const [title, setTitle] = useState('');
   const [thumbnail, setThumbnail] = useState(null);
   const [timeline, setTimeline] = useState([]);
-  const [emotions, setEmotions] = useState({});
+  const [emotions, setEmotions] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAnalyzeVideo = async (url) => {
@@ -54,11 +54,10 @@ export default function Home() {
       }}
     >
       <Header />
-        
-        <Hero />
-        {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
-        <Test/>
-        {emotions && <ChartComponent fetchedData={emotions} />}
+      <Hero />
+      {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
+      {emotions && <Test/> }
+      {emotions && <ChartComponent fetchedData={emotions} />}
     </VideoContext.Provider>
 
       
