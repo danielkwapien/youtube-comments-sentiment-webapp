@@ -8,6 +8,7 @@ import Thumbnail from "@components/Thumbnail.jsx"
 import Hero from "@components/Hero.jsx";
 import EmotionChart from "@/components/EmotionChart.jsx"
 import AreaChartHero from "@/components/AreaChart.jsx";
+import Dashboard from "@/components/Dashboard.jsx";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -56,9 +57,7 @@ export default function Home() {
     >
       <Header />
       <Hero />
-      {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
-      {emotions && <EmotionChart/> }
-      {timeline && <AreaChartHero/>}
+      {emotions && <Dashboard />}
       
     </VideoContext.Provider>
 
