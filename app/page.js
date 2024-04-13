@@ -6,7 +6,8 @@ import ChartComponent from '@/components/Chart.jsx'
 import Header from '../components/Header.jsx';
 import Thumbnail from "@components/Thumbnail.jsx"
 import Hero from "@components/Hero.jsx";
-import Test from "@components/Test.jsx"
+import EmotionChart from "@/components/EmotionChart.jsx"
+import AreaChartHero from "@/components/AreaChart.jsx";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -16,7 +17,7 @@ export default function Home() {
 
   const [title, setTitle] = useState('');
   const [thumbnail, setThumbnail] = useState(null);
-  const [timeline, setTimeline] = useState([]);
+  const [timeline, setTimeline] = useState(null);
   const [emotions, setEmotions] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -56,8 +57,9 @@ export default function Home() {
       <Header />
       <Hero />
       {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
-      {emotions && <Test/> }
-      {emotions && <ChartComponent fetchedData={emotions} />}
+      {emotions && <EmotionChart/> }
+      {timeline && <AreaChartHero/>}
+      
     </VideoContext.Provider>
 
       

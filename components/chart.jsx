@@ -5,6 +5,7 @@ import { Pie } from 'react-chartjs-2';
 
 
 const ChartComponent = ({ fetchedData }) => {
+
     const data = {
         labels: Object.keys(fetchedData), // Assuming fetchedData holds your proportions data
         datasets: [{
