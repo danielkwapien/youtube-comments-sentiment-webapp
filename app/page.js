@@ -17,6 +17,8 @@ export const VideoContext = createContext();
 export default function Home() {
 
   const [title, setTitle] = useState('');
+  const [views, setViews] = useState(null);
+  const [commentCount, setCommentCount] = useState(null);
   const [thumbnail, setThumbnail] = useState(null);
   const [timeline, setTimeline] = useState(null);
   const [emotions, setEmotions] = useState(null);
@@ -31,6 +33,8 @@ export default function Home() {
             const response = await fetch(`http://localhost:5000/api/${videoId}`);
             const data = await response.json();
             setTitle(data.title['0'].title);
+            setViews(data.views);
+            setCommentCount(data.count);
             setThumbnail(data.thumbnail['0']);
             setTimeline(data.time);
             setEmotions(data.proportion);
@@ -48,6 +52,8 @@ export default function Home() {
       <VideoContext.Provider
       value={{
         title,
+        views,
+        commentCount,
         thumbnail,
         timeline,
         emotions,

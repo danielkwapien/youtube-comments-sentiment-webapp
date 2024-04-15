@@ -6,7 +6,7 @@ import AreaChartHero from "@/components/AreaChart.jsx";
 
 function Dashboard() {
     
-    const {title, thumbnail} = useContext(VideoContext);
+    const {title,views,commentCount ,thumbnail} = useContext(VideoContext);
 
     return (
         <div className='mx-auto max-w-7xl'>
@@ -26,12 +26,12 @@ function Dashboard() {
 
                 <Card className="mx-auto max-w-4xl row-span-2 col-span-1">
                     <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">Total views</p>
-                    <p className="text-4xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">123213</p>
+                    <p className="text-4xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">{views}</p>
                 </Card>
 
                 <Card className="mx-auto max-w-4xl row-span-2 col-span-1">
                     <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">Total comments</p>
-                    <p className="text-4xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">123213</p>
+                    <p className="text-4xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">{commentCount}</p>
                 </Card>
             </div>
             <div>
