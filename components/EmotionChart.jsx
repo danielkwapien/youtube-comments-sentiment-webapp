@@ -11,12 +11,19 @@ function EmotionChart() {
 
   // Define a mapping object for emotions to colors
   const emotionColors = {
-    approval: 'blue',
-    admiration: 'cyan',
-    curiosity: 'indigo',
-    excited: 'violet',
-    neutral: 'fuchsia',
-    // Add more emotions and their corresponding colors as needed
+    approval: 'blue',       // Blue
+    gratitude: 'green',      // Green
+    curiosity: 'yellow',      // Yellow
+    admiration: 'purple',     // Purple
+    excitement: 'red',     // Red
+    love: 'pink',           // Pink
+    annoyance: 'orange',      // Orange
+    optimism: 'orange',       // Orange
+    disapproval: '#c0392b',    // Dark red
+    confusion: '#34495e',      // Dark gray
+    disappointment: '#95a5a6', // Light gray
+    sadness: '#607d8b',        // Grayish blue
+    joy: '#27ae60',            // Dark green
   };
 
   // Map emotions to colors

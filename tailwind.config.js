@@ -21,6 +21,21 @@ module.exports = {
     },
     extend: {
       colors: {
+        emotions: {
+          approval: '#3498db',
+          gratitude: '#2ecc71',
+          curiosity: '#f1c40f',
+          admiration: '#9b59b6',
+          excitement: '#e74c3c',
+          love: '#e91e63',
+          annoyance: '#e67e22',
+          optimism: '#f39c12',
+          disapproval: '#c0392b',
+          confusion: '#34495e',
+          disappointment: '#95a5a6',
+          sadness: '#607d8b',
+          joy: '#27ae60'
+        },
         tremor: {
           brand: {
             faint: colors.blue[50],
