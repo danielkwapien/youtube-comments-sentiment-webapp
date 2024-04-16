@@ -1,1 +1,12 @@
 node_modules
+api/venv/
+api/__pycache__/
+api/*.py[cod]
+api/*.env
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

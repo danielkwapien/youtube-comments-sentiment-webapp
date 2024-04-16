@@ -30,7 +30,7 @@ export default function Home() {
             const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:(?:watch\?v=)?([^#&?]+))/;
             const match = url.match(regex);
             const videoId = match && match[1];
-            const response = await fetch(`http://localhost:5000/api/${videoId}`);
+            const response = await fetch(`/api/${videoId}`);
             const data = await response.json();
             setTitle(data.title['0'].title);
             setViews(data.views);
