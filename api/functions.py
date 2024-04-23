@@ -14,6 +14,9 @@ from transformers import AutoTokenizer, AutoConfig, AutoModelForSequenceClassifi
 from scipy.special import softmax
 import numpy as np
 from datetime import datetime, timedelta
+config = dotenv_values(".env")  # Load values and create a dictionary
+os.environ.update(config)
+
 class CommentAnalysis:
 
     def __init__(self, model_name):
@@ -39,10 +42,12 @@ class CommentAnalysis:
         load_dotenv()
         api_service_name = 'youtube'
         api_version = 'v3'
-        api_key = os.getenv('YOUTUBE_API_KEY')
+        key = os.getenv('YOUTUBE_API_KEY')
+        
+        print(key)
 
         youtube = googleapiclient.discovery.build(
-            api_service_name, api_version, developerKey = api_key  
+            api_service_name, api_version, developerKey=key  
         )
 
         comments = []
