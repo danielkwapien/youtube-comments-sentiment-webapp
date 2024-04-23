@@ -1,7 +1,6 @@
 import os
 import json
 from dotenv import load_dotenv, dotenv_values
-from flask import jsonify
 from transformers import pipeline
 import googleapiclient.discovery
 import googleapiclient.errors
@@ -9,9 +8,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import re
 import nltk
-import lxml
 import contractions
-import pickle
 import torch
 from transformers import AutoTokenizer, AutoConfig, AutoModelForSequenceClassification
 from scipy.special import softmax
