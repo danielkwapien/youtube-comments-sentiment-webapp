@@ -24,6 +24,7 @@ class CommentAnalysis:
         self.config = AutoConfig.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
         self.data = None
+        self.total_comments = 0
 
     def obtain_sentiment(self, text):
         encoded_text = self.tokenizer(text, return_tensors="pt")
@@ -52,6 +53,7 @@ class CommentAnalysis:
 
         comments = []
         next_page_token = None
+        total_comments = 0
 
         while True:
             request = youtube.commentThreads().list(
@@ -75,11 +77,15 @@ class CommentAnalysis:
                     comment['likeCount'],
                     #comment['parentId']
                 ])
+                total_comments += 1  # Count top-level comment
+                total_comments += item['snippet'].get('totalReplyCount', 0)
             next_page_token = res.get('nextPageToken')
             print(next_page_token)
             if not next_page_token:
-                print("Total comments:", len(comments))
+                print("Total comments:", total_comments)
                 break
+
+        self.total_comments = total_comments
         
         self.data = pd.DataFrame(comments, columns=['author', 'published_at', 'updated_at', 'likeCount', 'text', 'likeCount'])
 
@@ -105,6 +111,39 @@ class CommentAnalysis:
         proportion = self.obtain_proportion()
         proportion_list = [{'name': sentiment, 'value': value} for sentiment, value in proportion.items()]
         return json.dumps(proportion_list)
+
+    def get_comments_by_date(self):
+        timeline = pd.to_datetime(self.data['published_at']).dt.date.value_counts().sort_index()
+        timeline.index = timeline.index.astype(str)
+        timeline_json = timeline.to_json(orient='index')
+        return json.loads(timeline_json)
+    
+    def date_range(self, start_date, end_date):
+        current_date = datetime.strptime(start_date, "%Y-%m-%d")  
+        end_date = datetime.strptime(end_date, "%Y-%m-%d")  
+        while current_date <= end_date:
+            yield current_date.strftime("%Y-%m-%d")  #
+            current_date += timedelta(days=1)
+    
+    def get_timeline(self):
+        comments_by_date = {}
+
+        data = self.get_comments_by_date()
+
+        earliest_date = min(data.keys())
+        latest_date = max(data.keys())
+        for date in self.date_range(earliest_date, latest_date):
+            if date not in data:
+                comments_by_date[date] = 0
+            else:
+                comments_by_date[date] = data[date]
+
+        json_response = [{'date': date, 'count': count} for date, count in comments_by_date.items()]
+
+        return json_response
+    
+    def get_count(self):
+        return self.total_comments
     
 class ExtractFeatures:
 
@@ -151,37 +190,3 @@ class ExtractFeatures:
     def get_views(self):
         views = self.res['items'][0]['statistics']['viewCount']
         return views
-    
-    def get_comments_by_date(self):
-        timeline = pd.to_datetime(self.data['published_at']).dt.date.value_counts().sort_index()
-        timeline.index = timeline.index.astype(str)
-        timeline_json = timeline.to_json(orient='index')
-        return json.loads(timeline_json)
-    
-    def date_range(self, start_date, end_date):
-        current_date = datetime.strptime(start_date, "%Y-%m-%d")  
-        end_date = datetime.strptime(end_date, "%Y-%m-%d")  
-        while current_date <= end_date:
-            yield current_date.strftime("%Y-%m-%d")  #
-            current_date += timedelta(days=1)
-    
-    def get_timeline(self):
-        comments_by_date = {}
-
-        data = self.get_comments_by_date()
-
-        earliest_date = min(data.keys())
-        latest_date = max(data.keys())
-        for date in self.date_range(earliest_date, latest_date):
-            if date not in data:
-                comments_by_date[date] = 0
-            else:
-                comments_by_date[date] = data[date]
-
-        json_response = [{'date': date, 'count': count} for date, count in comments_by_date.items()]
-
-        return json_response
-    
-    def get_count(self):
-        comments = self.data
-        return len(comments)

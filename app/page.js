@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useState, useRef, useContext, createContext} from "react";
+import axios from 'axios';
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import ChartComponent from '@/components/Chart.jsx'
@@ -9,6 +10,7 @@ import Hero from "@components/Hero.jsx";
 import EmotionChart from "@/components/EmotionChart.jsx"
 import AreaChartHero from "@/components/AreaChart.jsx";
 import Dashboard from "@/components/Dashboard.jsx";
+import Loading from "@/components/Loading.jsx";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -30,14 +32,14 @@ export default function Home() {
             const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:(?:watch\?v=)?([^#&?]+))/;
             const match = url.match(regex);
             const videoId = match && match[1];
-            const response = await fetch(`/api/${videoId}`);
+            const response = await fetch(`/api/${videoId}`); 
             const data = await response.json();
             setTitle(data.title['0'].title);
             setViews(data.views);
             setCommentCount(data.count);
             setThumbnail(data.thumbnail['0']);
             setTimeline(data.time);
-            setEmotions(data.proportion);
+            setEmotions(data.proportion);  
         }
         catch (error) {
             console.error(error);
@@ -63,7 +65,12 @@ export default function Home() {
     >
       <Header />
       <Hero />
-      {emotions && <Dashboard />}
+      {!emotions && (
+        <> 
+          {isLoading && <Loading/>} 
+        </>
+      )}
+      {emotions && !isLoading && <Dashboard />}
       
     </VideoContext.Provider>
 

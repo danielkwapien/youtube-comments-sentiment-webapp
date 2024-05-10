@@ -32,10 +32,12 @@ async def analyze_comments(url: str):
     proportion_data = analyzer.get_proportion()
     proportion_json = json.loads(proportion_data)
     
-    video.call_api()
+    
 
-    date_json = video.get_timeline()
-    comment_count = video.get_count()
+    date_json = analyzer.get_timeline()
+    comment_count = analyzer.get_count()
+
+    video.call_api()
     thumbnail_json = video.get_thumbnail()
     title_json = video.get_title()
     views = video.get_views()
