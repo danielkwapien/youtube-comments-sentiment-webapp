@@ -23,7 +23,8 @@ class CommentAnalysis:
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.config = AutoConfig.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
-        self.data = None
+        self.data_sentiment = None
+        self.data_raw = None
         self.total_comments = 0
 
     def obtain_sentiment(self, text):
@@ -86,8 +87,10 @@ class CommentAnalysis:
                 break
 
         self.total_comments = total_comments
+
+        self.data_raw = pd.DataFrame(comments, columns=['author', 'published_at', 'updated_at', 'likeCount', 'text', 'likeCount'])
         
-        self.data = pd.DataFrame(comments, columns=['author', 'published_at', 'updated_at', 'likeCount', 'text', 'likeCount'])
+        self.data_sentiment = self.data_raw[self.data_raw['text'].str.len()<300].sample(n=100, ignore_index=True)
 
     def wrangle_text(self, text):
         soup = BeautifulSoup(text, 'html')
@@ -99,11 +102,11 @@ class CommentAnalysis:
 
 
     def get_sentiment(self):
-        self.data['wrangled_text'] = self.data['text'].apply(self.wrangle_text)
-        self.data['sentiment'] = self.data['wrangled_text'].apply(self.obtain_sentiment)
+        self.data_sentiment['wrangled_text'] = self.data_sentiment['text'].apply(self.wrangle_text)
+        self.data_sentiment['sentiment'] = self.data_sentiment['wrangled_text'].apply(self.obtain_sentiment)
 
     def obtain_proportion(self):
-        sentiment_proportion = self.data['sentiment'].value_counts(normalize=True)
+        sentiment_proportion = self.data_sentiment['sentiment'].value_counts(normalize=True)
         return sentiment_proportion
 
     def get_proportion(self):
@@ -113,7 +116,7 @@ class CommentAnalysis:
         return json.dumps(proportion_list)
 
     def get_comments_by_date(self):
-        timeline = pd.to_datetime(self.data['published_at']).dt.date.value_counts().sort_index()
+        timeline = pd.to_datetime(self.data_raw['published_at']).dt.date.value_counts().sort_index()
         timeline.index = timeline.index.astype(str)
         timeline_json = timeline.to_json(orient='index')
         return json.loads(timeline_json)
