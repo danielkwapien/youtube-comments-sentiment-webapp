@@ -90,7 +90,7 @@ class CommentAnalysis:
 
         self.data_raw = pd.DataFrame(comments, columns=['author', 'published_at', 'updated_at', 'likeCount', 'text', 'likeCount'])
         
-        self.data_sentiment = self.data_raw[self.data_raw['text'].str.len()<300].sample(n=200, ignore_index=True)
+        self.data_sentiment = self.data_raw[self.data_raw['text'].str.len()<300].sample(n=50, ignore_index=True)
 
     def wrangle_text(self, text):
         soup = BeautifulSoup(text, 'html')

@@ -11,7 +11,7 @@ function AreaChartHero() {
  
   return (
     <AreaChart
-      className="h-80"xw
+      className="h-80"
       data={timeline}
       index="date"
       categories={['count']}

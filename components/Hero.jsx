@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Input } from "@components/ui/input.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import { VideoContext } from "../app/page.js";
+import { WavyBackground } from "@components/ui/wavy-background.jsx";
 
 function Hero() {
 
@@ -17,6 +18,7 @@ function Hero() {
       };
 
   return (
+    <WavyBackground className="max-w-4xl mx-auto">
     <div className="relative isolate pt-14 dark:bg-black">
         <div className="py-12 sm:py-20 lg:pb-40">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -40,6 +42,7 @@ function Hero() {
           </div>
         </div>
       </div>
+      </WavyBackground>
   )
 }
 
