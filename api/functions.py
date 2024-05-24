@@ -112,7 +112,21 @@ class CommentAnalysis:
     def get_proportion(self):
         self.get_sentiment()
         proportion = self.obtain_proportion()
-        proportion_list = [{'name': sentiment, 'value': value} for sentiment, value in proportion.items()]
+
+        total = sum(proportion)
+        threshold = 0.015 * total
+        grouped_proportions = {}
+        others_sum = 0
+        for sentiment, value in proportion.items():
+            if value < threshold:
+                others_sum += value
+            else:
+                grouped_proportions[sentiment] = value
+
+        if others_sum > 0:
+            grouped_proportions['Others'] = others_sum
+
+        proportion_list = [{'name': sentiment, 'value': value} for sentiment, value in grouped_proportions.items()]
         return json.dumps(proportion_list)
 
     def get_comments_by_date(self):
