@@ -55,7 +55,7 @@ function EmotionChart() {
           valueFormatter={dataFormatter}
           showLabel={false}
           colors={colors}
-          className="w-40"
+          className="h-80 px-16"
         />
       </div>
   );

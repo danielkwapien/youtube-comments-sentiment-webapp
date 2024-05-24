@@ -39,7 +39,7 @@ function Dashboard() {
             </div>
             <div className='grid grid-cols-3 gap-4 py-5'>
                 <div className='col-span-1'>
-                    <Card className='mx-auto max-w-4xl'>
+                    <Card className='mx-auto max-h-4xl'>
                         <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">Proportion of emotions</p>
                         <EmotionChart />
                     </Card>
