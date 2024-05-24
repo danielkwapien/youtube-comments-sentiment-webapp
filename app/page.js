@@ -65,9 +65,9 @@ export default function Home() {
     >
       <Header />
       <Hero />
-      {!emotions && (
+      {isLoading  && (
         <> 
-          {isLoading && <Loading/>} 
+          {<Loading/>} 
         </>
       )}
       {emotions && !isLoading && <Dashboard />}
