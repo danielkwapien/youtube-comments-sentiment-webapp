@@ -26,12 +26,12 @@ function Dashboard() {
 
                 <Card className="mx-auto max-w-4xl row-span-2 col-span-1">
                     <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">Total views</p>
-                    <p className="text-4xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">{views}</p>
+                    <p className="text-4xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">{Number(views).toLocaleString('en-US')}</p>
                 </Card>
 
                 <Card className="mx-auto max-w-4xl row-span-2 col-span-1">
                     <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">Total comments</p>
-                    <p className="text-4xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">{commentCount}</p>
+                    <p className="text-4xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">{Number(commentCount).toLocaleString('en-US')}</p>
                 </Card>
             </div>
             <div>
