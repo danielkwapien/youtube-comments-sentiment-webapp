@@ -33,9 +33,10 @@ async def analyze_comments(url: str):
     proportion_json = json.loads(proportion_data)
     
     
-
     date_json = analyzer.get_timeline()
     comment_count = analyzer.get_count()
+    top_comment = analyzer.get_top_comment()
+    top_comment_json = json.loads(top_comment.to_json(orient='index'))
 
     video.call_api()
     thumbnail_json = video.get_thumbnail()
@@ -48,7 +49,8 @@ async def analyze_comments(url: str):
         'time': date_json,
         'thumbnail': thumbnail_json,
         'title': title_json,
-        'views': views
+        'views': views,
+        'topComment': top_comment_json
     }
     return JSONResponse(content=data_json)
 

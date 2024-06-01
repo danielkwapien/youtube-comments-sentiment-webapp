@@ -11,6 +11,7 @@ import EmotionChart from "@/components/EmotionChart.jsx"
 import AreaChartHero from "@/components/AreaChart.jsx";
 import Dashboard from "@/components/Dashboard.jsx";
 import Loading from "@/components/Loading.jsx";
+import Footer from "@/components/Footer.jsx";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -24,6 +25,7 @@ export default function Home() {
   const [thumbnail, setThumbnail] = useState(null);
   const [timeline, setTimeline] = useState(null);
   const [emotions, setEmotions] = useState(null);
+  const [topComment, setTopComment] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAnalyzeVideo = async (url) => {
@@ -39,7 +41,8 @@ export default function Home() {
             setCommentCount(data.count);
             setThumbnail(data.thumbnail['0']);
             setTimeline(data.time);
-            setEmotions(data.proportion);  
+            setEmotions(data.proportion); 
+            setTopComment(data.topComment);
         }
         catch (error) {
             console.error(error);
@@ -59,6 +62,7 @@ export default function Home() {
         thumbnail,
         timeline,
         emotions,
+        topComment,
         isLoading,
         analyzeVideo: handleAnalyzeVideo,
       }}
@@ -71,6 +75,8 @@ export default function Home() {
         </>
       )}
       {emotions && !isLoading && <Dashboard />}
+    
+    <Footer />
       
     </VideoContext.Provider>
 

@@ -6,7 +6,7 @@ import AreaChartHero from "@/components/AreaChart.jsx";
 
 function Dashboard() {
     
-    const {title,views,commentCount ,thumbnail} = useContext(VideoContext);
+    const {title,views,commentCount ,thumbnail, topComment} = useContext(VideoContext);
 
     return (
         <div className='mx-auto max-w-7xl'>
@@ -51,6 +51,12 @@ function Dashboard() {
                         <AreaChartHero />
                     </Card>
                     
+                </div>
+                <div className='col-span-3'>
+                    <Card className="">
+                        <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">Top comment</p>
+                        <p className="text-2xl text-tremor-content-strong dark:text-dark-tremor-content-strong regular">{topComment.text}</p>
+                    </Card>
                 </div>
             </div>
         </div>

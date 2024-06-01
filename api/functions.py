@@ -76,7 +76,6 @@ class CommentAnalysis:
                         comment['updatedAt'],
                         comment['likeCount'],
                         comment['textDisplay'],
-                        comment['likeCount'],
                         #comment['parentId']
                     ])
                 total_comments += 1  # Count top-level comment
@@ -89,7 +88,7 @@ class CommentAnalysis:
 
         self.total_comments = total_comments
 
-        self.data_raw = pd.DataFrame(comments, columns=['author', 'published_at', 'updated_at', 'likeCount', 'text', 'likeCount'])
+        self.data_raw = pd.DataFrame(comments, columns=['author', 'published_at', 'updated_at', 'likeCount', 'text'])
         print(self.data_raw)
         
         self.data_sentiment = self.data_raw[self.data_raw['text'].str.len()<300]
@@ -164,6 +163,9 @@ class CommentAnalysis:
     
     def get_count(self):
         return self.total_comments
+    
+    def get_top_comment(self):
+        return self.data_raw.sort_values('likeCount' ,ascending=False).reset_index(drop=True)[['likeCount','text']].iloc[0]
     
 class ExtractFeatures:
 
