@@ -68,16 +68,17 @@ class CommentAnalysis:
 
         
             for item in res['items']:
-                comment = item['snippet']['topLevelComment']['snippet']
-                comments.append([
-                    comment['authorDisplayName'],
-                    comment['publishedAt'],
-                    comment['updatedAt'],
-                    comment['likeCount'],
-                    comment['textDisplay'],
-                    comment['likeCount'],
-                    #comment['parentId']
-                ])
+                if total_comments<100:
+                    comment = item['snippet']['topLevelComment']['snippet']
+                    comments.append([
+                        comment['authorDisplayName'],
+                        comment['publishedAt'],
+                        comment['updatedAt'],
+                        comment['likeCount'],
+                        comment['textDisplay'],
+                        comment['likeCount'],
+                        #comment['parentId']
+                    ])
                 total_comments += 1  # Count top-level comment
                 total_comments += item['snippet'].get('totalReplyCount', 0)
             next_page_token = res.get('nextPageToken')
@@ -89,8 +90,9 @@ class CommentAnalysis:
         self.total_comments = total_comments
 
         self.data_raw = pd.DataFrame(comments, columns=['author', 'published_at', 'updated_at', 'likeCount', 'text', 'likeCount'])
+        print(self.data_raw)
         
-        self.data_sentiment = self.data_raw[self.data_raw['text'].str.len()<300].sample(n=50, ignore_index=True)
+        self.data_sentiment = self.data_raw[self.data_raw['text'].str.len()<300]
 
     def wrangle_text(self, text):
         soup = BeautifulSoup(text, 'html')
@@ -146,6 +148,7 @@ class CommentAnalysis:
         comments_by_date = {}
 
         data = self.get_comments_by_date()
+        print(data)
 
         earliest_date = min(data.keys())
         latest_date = max(data.keys())
