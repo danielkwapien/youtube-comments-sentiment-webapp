@@ -4,6 +4,7 @@ import { VideoContext } from '@/app/page';
 import EmotionChart from "@/components/EmotionChart.jsx"
 import AreaChartHero from "@/components/AreaChart.jsx";
 import Timelinechart from '@components/charts/Timelinechart.jsx';
+import Emotionchart from '@components/charts/Emotionchart.jsx';
 
 function Dashboard({targetRef}) {
     
@@ -61,7 +62,7 @@ function Dashboard({targetRef}) {
                 </div>
                 <div className='col-span-3'>
                     <Card className="">
-                    <Timelinechart />
+                    <Emotionchart />
                     </Card>
                 </div>
                 

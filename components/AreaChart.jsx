@@ -27,6 +27,7 @@ function AreaChartHero() {
       index="date"
       categories={['count']}
       colors={['indigo']}
+      curveType='monotone'
       valueFormatter={dataFormatter}
       yAxisWidth={60}
       onValueChange={(v) => console.log(v)}
