@@ -19,6 +19,13 @@ export const VideoContext = createContext();
 
 export default function Home() {
 
+  const myRef = useRef(null);
+
+  const scrollToComponent = () => {
+    //dashboard = document.getElementById('dashboard');
+    //dashboard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   const [title, setTitle] = useState('');
   const [views, setViews] = useState(null);
   const [commentCount, setCommentCount] = useState(null);
@@ -30,6 +37,7 @@ export default function Home() {
 
   const handleAnalyzeVideo = async (url) => {
     setIsLoading(true);
+    scrollToComponent();
         try {
             const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:(?:watch\?v=)?([^#&?]+))/;
             const match = url.match(regex);
@@ -48,6 +56,7 @@ export default function Home() {
             console.error(error);
         }
         finally {
+            
             setIsLoading(false);
         }
   };
@@ -68,13 +77,13 @@ export default function Home() {
       }}
     >
       <Header />
-      <Hero />
+      <Hero/>
       {isLoading  && (
         <> 
           {<Loading/>} 
         </>
       )}
-      {emotions && !isLoading && <Dashboard />}
+      {emotions && !isLoading && <Dashboard targetRef={myRef} />}
     
     <Footer />
       

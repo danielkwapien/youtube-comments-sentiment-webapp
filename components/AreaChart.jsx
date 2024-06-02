@@ -8,11 +8,22 @@ const dataFormatter = (number) =>
 function AreaChartHero() {
 
   const {timeline} = useContext(VideoContext);
+
+    function formatDate(dateInput) {
+        const date = new Date(dateInput);
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+    
+    const formattedData = timeline.map(item => ({
+        ...item,
+        date: formatDate(item.date)
+    }));
  
   return (
     <AreaChart
       className="h-80"
-      data={timeline}
+      data={formattedData}
       index="date"
       categories={['count']}
       colors={['indigo']}

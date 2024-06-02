@@ -3,13 +3,14 @@ import { useContext } from 'react';
 import { VideoContext } from '@/app/page';
 import EmotionChart from "@/components/EmotionChart.jsx"
 import AreaChartHero from "@/components/AreaChart.jsx";
+import Timelinechart from '@components/charts/Timelinechart.jsx';
 
-function Dashboard() {
+function Dashboard({targetRef}) {
     
     const {title,views,commentCount ,thumbnail, topComment} = useContext(VideoContext);
 
     return (
-        <div className='mx-auto max-w-7xl'>
+        <div id='dashboard' className='mx-auto max-w-7xl'>
             <div>
                 <h2 className="text-2xl font-bold tracking-tight sm:text-4xl">Video Information</h2>
             </div>
@@ -58,6 +59,12 @@ function Dashboard() {
                         <p className="text-2xl text-tremor-content-strong dark:text-dark-tremor-content-strong regular">{topComment.text}</p>
                     </Card>
                 </div>
+                <div className='col-span-3'>
+                    <Card className="">
+                    <Timelinechart />
+                    </Card>
+                </div>
+                
             </div>
         </div>
         

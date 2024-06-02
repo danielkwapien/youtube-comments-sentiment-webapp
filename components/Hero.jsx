@@ -18,7 +18,8 @@ function Hero() {
       };
 
   return (
-    <WavyBackground className="max-w-4xl mx-auto">
+    <div className="h-1/2">
+      <WavyBackground className="max-w-4xl mx-auto">
     <div className="relative isolate pt-14 dark:bg-black">
         <div className="py-12 sm:py-20 lg:pb-40">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -43,6 +44,8 @@ function Hero() {
         </div>
       </div>
       </WavyBackground>
+    </div>
+    
   )
 }
 
