@@ -1,10 +1,25 @@
 import { useContext } from 'react';
 import { VideoContext } from '@/app/page';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { Card} from '@tremor/react';
 
 
 const dataFormatter = (number) =>
   `${Intl.NumberFormat('us').format(number).toString()}`;
+
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div>
+            <Card className="mx-auto max-w-2xl">
+                <p className="label"><span className='font-bold'>{`${payload[0].name} :`}</span>{` ${payload[0].value}`}</p>
+            </Card>
+        </div>
+      );
+    }
+  
+    return null;
+};
 
 function Emotionchart() {
 
@@ -46,23 +61,25 @@ function Emotionchart() {
 
 
   return (
-    <ResponsiveContainer width="100%" height="100%" minHeight={200}>
-    <PieChart width={500} height={300}>
-        <Pie
-        data={emotions}
-        innerRadius={60}
-        outerRadius={80}
-        fill="#8884d8"
-        paddingAngle={5}
-        dataKey="value"
-        >
-        {emotions.map((value, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-        </Pie>
-        <Tooltip />
-    </PieChart>
-    </ResponsiveContainer>
+    <div className="flex items-center justify-center space-x-6 h-80 px-16">
+        <ResponsiveContainer width="100%" height="100%" minHeight={100}>
+        <PieChart width="100%" height="100%">
+            <Pie
+            data={emotions}
+            innerRadius={80}
+            outerRadius={100}
+            fill="#8884d8"
+            paddingAngle={5}
+            dataKey="value"
+            >
+            {emotions.map((value, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+            </Pie>
+            <Tooltip content={<CustomTooltip />}/>
+        </PieChart>
+        </ResponsiveContainer>
+    </div>
   );
 }
 
