@@ -1,9 +1,9 @@
 import React from 'react'
 import { Skeleton } from "@/components/ui/skeleton"
 
-function Loading() {
+function Loading({targetRef}) {
   return (
-    <div className='mx-auto max-w-7xl'>
+    <div ref={targetRef} className='mx-auto max-w-7xl' id="shadow-loader">
       <div class="grid grid-rows-2 grid-flow-col gap-4 py-5">
             <Skeleton className="h-[250px] w-[400px] rounded-xl mx-auto max-w-4xl row-span-3 col-span-1" />
             <Skeleton className="h-[100px] w-[750px] rounded-xl mx-auto max-w-4xl col-span-2" /> 

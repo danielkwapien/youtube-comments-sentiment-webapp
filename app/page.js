@@ -19,12 +19,14 @@ export const VideoContext = createContext();
 
 export default function Home() {
 
-  const myRef = useRef(null);
+  const targetRef = useRef(null);
 
   const scrollToComponent = () => {
-    //dashboard = document.getElementById('dashboard');
-    //dashboard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    console.log(targetRef.current)
+    targetRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    console.log('scrolling')
   };
+  
 
   const [title, setTitle] = useState('');
   const [views, setViews] = useState(null);
@@ -35,9 +37,14 @@ export default function Home() {
   const [topComment, setTopComment] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    if (isLoading && targetRef.current) {
+      scrollToComponent();
+    }
+  }, [isLoading, targetRef.current]);
+
   const handleAnalyzeVideo = async (url) => {
     setIsLoading(true);
-    scrollToComponent();
         try {
             const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:(?:watch\?v=)?([^#&?]+))/;
             const match = url.match(regex);
@@ -80,10 +87,10 @@ export default function Home() {
       <Hero/>
       {isLoading  && (
         <> 
-          {<Loading/>} 
+          {<Loading targetRef={targetRef}/>} 
         </>
       )}
-      {emotions && !isLoading && <Dashboard targetRef={myRef} />}
+      {emotions && !isLoading && <Dashboard />}
     
     <Footer />
       

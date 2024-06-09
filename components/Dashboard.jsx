@@ -7,7 +7,7 @@ import Timelinechart from '@components/charts/Timelinechart.jsx';
 import Emotionchart from '@components/charts/Emotionchart.jsx';
 
 
-function Dashboard({targetRef}) {
+function Dashboard() {
     
     const {title,views,commentCount ,thumbnail, topComment} = useContext(VideoContext);
 
