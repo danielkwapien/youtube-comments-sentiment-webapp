@@ -12,6 +12,7 @@ import AreaChartHero from "@/components/AreaChart.jsx";
 import Dashboard from "@/components/Dashboard.jsx";
 import Loading from "@/components/Loading.jsx";
 import Footer from "@/components/Footer.jsx";
+import { NextUIProvider } from "@nextui-org/react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -96,7 +97,6 @@ export default function Home() {
       
     </VideoContext.Provider>
 
-      
     </main>
   );
 }
