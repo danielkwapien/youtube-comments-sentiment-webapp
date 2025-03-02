@@ -28,22 +28,6 @@ export default function Home() {
     console.log('scrolling')
   };
   
-
-  const [title, setTitle] = useState('');
-  const [views, setViews] = useState(null);
-  const [commentCount, setCommentCount] = useState(null);
-  const [thumbnail, setThumbnail] = useState(null);
-  const [timeline, setTimeline] = useState(null);
-  const [emotions, setEmotions] = useState(null);
-  const [topComment, setTopComment] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (isLoading && targetRef.current) {
-      scrollToComponent();
-    }
-  }, [isLoading, targetRef.current]);
-
   const handleAnalyzeVideo = async (url) => {
     setIsLoading(true);
         try {
@@ -69,6 +53,37 @@ export default function Home() {
         }
   };
 
+  const [title, setTitle] = useState('');
+  const [views, setViews] = useState(null);
+  const [commentCount, setCommentCount] = useState(null);
+  const [thumbnail, setThumbnail] = useState(null);
+  const [timeline, setTimeline] = useState(null);
+  const [emotions, setEmotions] = useState(null);
+  const [topComment, setTopComment] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (isLoading && targetRef.current) {
+      scrollToComponent();
+    }
+  }, [isLoading, targetRef.current]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (emotions) {
+        const message = "Warning: Reloading or closing this page will lose the current video analysis. Are you sure you want to continue?";
+        event.returnValue = message; 
+        return message; 
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [emotions]);
+
   return (
     <main className="">
       <VideoContext.Provider
@@ -84,6 +99,7 @@ export default function Home() {
         analyzeVideo: handleAnalyzeVideo,
       }}
     >
+      {console.log("VideoContext value:", { title, views, commentCount, thumbnail, timeline, emotions, topComment, isLoading, analyzeVideo: handleAnalyzeVideo })}
       <Header />
       <Hero/>
       {isLoading  && (

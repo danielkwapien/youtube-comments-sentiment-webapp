@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { HeroHighlight, Highlight } from "./ui/hero-highlight";
 import { Input } from "@components/ui/input.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import { VideoContext } from "../app/page.js";
@@ -18,8 +19,6 @@ function Hero() {
       };
 
   return (
-    <div className="h-1/2">
-      <WavyBackground className="max-w-4xl mx-auto">
     <div className="relative isolate pt-14 dark:bg-black">
         <div className="py-12 sm:py-20 lg:pb-40">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -27,11 +26,8 @@ function Hero() {
               <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
                 Uncover YouTube Comments
               </h1>
-              <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
-                Analyze youtube comments with ease and understand your {" "}
-                <span className="text-indigo-600 dark:text-indigo-500">
-                  audience
-                </span>
+              <p className="mt-6 text-lg font-semibold leading-10 dark:text-gray-300">
+                Analyze youtube comments with ease and <Highlight>understand your audience</Highlight>.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Input type="text" placeholder="Enter a youtube video link" value={videoUrl} onChange={handleInputChange} />
@@ -43,8 +39,6 @@ function Hero() {
           </div>
         </div>
       </div>
-      </WavyBackground>
-    </div>
     
   )
 }
