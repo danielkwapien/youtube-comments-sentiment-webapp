@@ -19,7 +19,7 @@ function Dashboard() {
             <div class=" grid grid-rows-2 grid-flow-col gap-4 py-5">
                 <Card className="mx-auto max-w-4xl row-span-3 col-span-1">
                     <p className="text-tremor-default font-semibold text-tremor-content-emphasis dark:text-dark-tremor-content">Thumbnail</p>
-                    <img src={thumbnail.url} alt={title} />
+                    <img src={thumbnail.url} alt={title} className="mt-4" />
                 </Card>
                 
                 <Card className="mx-auto max-w-4xl col-span-2">
@@ -59,6 +59,9 @@ function Dashboard() {
                     <Card className="">
                         <p className="text-tremor-default font-semibold text-tremor-content-emphasis dark:text-dark-tremor-content">Top comment</p>
                         <p className="text-2xl text-tremor-content-strong dark:text-dark-tremor-content-strong regular">{topComment.text}</p>
+                        <p className="text-tremor-default font-semibold text-tremor-content-emphasis dark:text-dark-tremor-content mt-2">
+                            Likes: {topComment.likeCount}
+                        </p>
                     </Card>
                 </div>
                 

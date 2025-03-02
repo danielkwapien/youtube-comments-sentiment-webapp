@@ -7,12 +7,15 @@ import { Card} from '@tremor/react';
 const dataFormatter = (number) =>
   `${Intl.NumberFormat('us').format(number).toString()}`;
 
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload, label, emotions }) => {
     if (active && payload && payload.length) {
       return (
         <div>
             <Card className="mx-auto max-w-2xl">
-                <p className="label"><span className='font-bold'>{`${payload[0].name} :`}</span>{` ${payload[0].value}`}</p>
+                <p className="label">
+                    <span className='font-bold'>{`${payload[0].name} :`}</span>
+                    {` ${((payload[0].value / emotions.reduce((sum, emotion) => sum + emotion.value, 0)) * 100).toFixed(1)}%`}
+                </p>
             </Card>
         </div>
       );
@@ -76,7 +79,7 @@ function Emotionchart() {
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
             </Pie>
-            <Tooltip content={<CustomTooltip />}/>
+            <Tooltip content={<CustomTooltip emotions={emotions} />}/>
         </PieChart>
         </ResponsiveContainer>
     </div>
